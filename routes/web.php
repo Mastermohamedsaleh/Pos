@@ -29,6 +29,10 @@ Route::group(
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){ //...
  
+
+
+
+        
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
          Route::resource('users',UserController::class);

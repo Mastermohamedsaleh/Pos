@@ -8,6 +8,11 @@
 
             <h1>@lang('site.users')</h1>
 
+            @if(Session::has('success'))
+<p class="alert alert-info">{{ Session::get('success') }}</p>
+@endif
+
+
             <ol class="breadcrumb">
                 <li><a href=""><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
                 <li class="active">@lang('site.users')</li>
@@ -22,20 +27,21 @@
 
                     <h3 class="box-title" style="margin-bottom: 15px">@lang('site.users') <small></small></h3>
 
-                    <form action="" method="get">
+                    <form action="{{route('users.index')}}" method="get">
 
                         <div class="row">
 
                             <div class="col-md-4">
-                                <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search }}">
+                                <input type="text" name="search" class="form-control" placeholder="@lang('site.search')"  value="{{ request()->search }}">
                             </div>
 
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
-                              
-                                    <a href="{{route('users.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
-                        
-                                  
+                @if (auth()->user()->hasPermission('users_create'))              
+                <a href="{{route('users.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                @else
+                <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                @endif
                           
                             </div>
 
@@ -69,18 +75,22 @@
                                     <td>{{ $user->email }}</td>
                                     <td><img src="{{ $user->image_path }}" style="width: 100px;" class="img-thumbnail" alt=""></td>
                                     <td>
-                                        
-                                            <a href="" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
-                                  
+                                    @if (auth()->user()->hasPermission('users_update'))                
+                        <a href="{{route('users.edit',$user->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                        @else
+                            <a href="#" class="btn btn-info btn-sm disabled"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                        @endif
                                            
                                   
-                                       
+                            @if (auth()->user()->hasPermission('users_delete'))
                                             <form action="" method="post" style="display: inline-block">
                                                     @csrf
                                                 {{ method_field('delete') }}
                                                 <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                             </form><!-- end of form -->
-                                                                        
+                                            @else
+                                            <button class="btn btn-danger btn-sm disabled"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                        @endif                                
                                      
                                     </td>
                                 </tr>
@@ -89,7 +99,8 @@
                             </tbody>
 
                         </table><!-- end of table -->
-                        
+                                
+                        {{ $users->appends(request()->query())->links() }}
                       
                         
                     @else

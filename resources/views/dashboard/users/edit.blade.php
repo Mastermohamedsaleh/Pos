@@ -9,9 +9,9 @@
             <h1>@lang('site.users')</h1>
 
             <ol class="breadcrumb">
-                <li><a href=""><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                <li><a href=""> @lang('site.users')</a></li>
-                <li class="active">@lang('site.add')</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                <li><a href="#"> @lang('site.users')</a></li>
+                <li class="active">@lang('site.edit')</li>
             </ol>
         </section>
 
@@ -20,41 +20,28 @@
             <div class="box box-primary">
 
                 <div class="box-header">
-                    <h3 class="box-title">@lang('site.add')</h3>
+                    <h3 class="box-title">@lang('site.edit')</h3>
                 </div><!-- end of box header -->
 
                 <div class="box-body">
 
-                @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+              
 
-
- 
-
-                    <form action="{{route('users.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('users.update', $user->id) }}" method="post" enctype="multipart/form-data">
 
                         @csrf
-                     
+                        {{ method_field('put') }}
+
+                  
 
                         <div class="form-group">
                             <label>@lang('site.name')</label>
-                            <input type="text" name="name" class="form-control" >
+                            <input type="text" name="name" class="form-control" value="{{ $user->name }}">
                         </div>
-
-
-
-        
 
                         <div class="form-group">
                             <label>@lang('site.email')</label>
-                            <input type="email" name="email" class="form-control" >
+                            <input type="email" name="email" class="form-control" value="{{ $user->email }}">
                         </div>
 
                         <div class="form-group">
@@ -63,17 +50,7 @@
                         </div>
 
                         <div class="form-group">
-                            <img src="{{ asset('uploads/user_images/default.png') }}"  style="width: 100px" class="img-thumbnail image-preview" alt="">
-                        </div>
-
-                        <div class="form-group">
-                            <label>@lang('site.password')</label>
-                            <input type="password" name="password" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label>@lang('site.password_confirmation')</label>
-                            <input type="password" name="password_confirmation" class="form-control">
+                            <img src="{{ $user->image_path }}" style="width: 100px" class="img-thumbnail image-preview" alt="">
                         </div>
 
                         <div class="form-group">
@@ -98,7 +75,8 @@
                                         <div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{ $model }}">
 
                                             @foreach ($maps as $map)
-                                                <label><input type="checkbox" name="permissions[]" value="{{ $model . '_' . $map  }}"> @lang('site.' . $map)</label>
+                                                {{--create_users--}}
+                                                <label><input type="checkbox" name="permissions[]" {{ $user->hasPermission($model.'_'.$map) ? 'checked' : '' }} value="{{ $model . '_' .  $map }}"> @lang('site.' . $map)</label>
                                             @endforeach
 
                                         </div>
@@ -106,13 +84,13 @@
                                     @endforeach
 
                                 </div><!-- end of tab content -->
-                                
+
                             </div><!-- end of nav tabs -->
-                            
+
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> @lang('site.edit')</button>
                         </div>
 
                     </form><!-- end of form -->
