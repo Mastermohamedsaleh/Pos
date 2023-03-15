@@ -48,11 +48,14 @@ return [
    'image' => 'صوره',
    'action' => 'اكشن',
 
+
    'permissions' => 'الصلاحيات',
 
    'categories' => 'الاقسام',
    'all_categories' => 'كل الاقسام',
    'name' => 'الاسم',
+   'name_ar'=>'الاسم باللغه العربيه',
+   'name_en'=>'الاسم باللغه الانجليزيه',
    'description' => 'الوصف',
    'products_count' => 'عدد الامنتجات',
    'related_products' => 'المنتجات المرتبطه',
@@ -69,5 +72,8 @@ return [
    'sale_price' => 'سعر البيع',
    'stock' => 'المخزن',
    'profit_percent' => 'المكسب',
+   'description_ar'=>'الوصق باللغه العربيه',
+   'description_en'=>'الوصف باللغه الانجليزيه'
+
      
 ];
