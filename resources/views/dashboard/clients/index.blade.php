@@ -6,15 +6,17 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.products')</h1>
+            <h1>@lang('site.clients')</h1>
 
 
             @if(Session::has('success'))
 <p class="alert alert-info">{{ Session::get('success') }}</p>
 @endif
+
+
             <ol class="breadcrumb">
                 <li><a href=""><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
-                <li class="active">@lang('site.products')</li>
+                <li class="active">@lang('site.clients')</li>
             </ol>
         </section>
 
@@ -24,9 +26,9 @@
 
                 <div class="box-header with-border">
 
-                    <h3 class="box-title" style="margin-bottom: 15px">@lang('site.products')</h3>
+                    <h3 class="box-title" style="margin-bottom: 15px">@lang('site.clients') </h3>
 
-                    <form action="{{ Route('prodects.index') }}" method="get">
+                    <form action="{{ route('clients.index') }}" method="get">
 
                         <div class="row">
 
@@ -34,15 +36,11 @@
                                 <input type="text" name="search" class="form-control" placeholder="@lang('site.search')" value="{{ request()->search }}">
                             </div>
 
-               
-                            
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
-                                @if (auth()->user()->hasPermission('products_create'))
-                                    <a href="{{ route('prodects.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
-                                @else
-                                    <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
-                                @endif
+                            
+                                    <a href="{{ route('clients.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                               
                             </div>
 
                         </div>
@@ -52,48 +50,44 @@
 
                 <div class="box-body">
 
-                    @if ($products->count() > 0)
+                    @if ($clients->count() > 0)
 
-                        <table class="table table-hover text-center">
+                        <table class="table table-hover">
 
                             <thead>
                             <tr>
                                 <th>#</th>
                                 <th>@lang('site.name')</th>
-                                <th>@lang('site.category')</th>
-                                <th>@lang('site.image')</th>
-                                <th>@lang('site.purchase_price')</th>
-                                <th>@lang('site.sale_price')</th>
-                                <th>@lang('site.profit_percent') %</th>
-                                <th>@lang('site.stock')</th>
+                                <th>@lang('site.phone')</th>
+                                <th>@lang('site.address')</th>
                                 <th>@lang('site.action')</th>
                             </tr>
                             </thead>
                             
                             <tbody>
-                            @foreach ($products as $index=>$product)
+                            @foreach ($clients as $index=>$client)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $product->name }}</td>
-                                 
-                                    <td>{{ $product->category->name }}</td>
-                                    <td><img src="{{ asset('uploads/products/'.$product->image) }}" style="width: 100px"  class="img-thumbnail" alt=""></td>
-                                    <td>{{ $product->purchase_price }}</td>
-                                    <td>{{ $product->sale_price }}</td>
-                                    <td>{{ $product->profit_percent }} %</td>
-                                    <td>{{ $product->stock }}</td>
+                                <td>{{ $index + 1 }}</td>
+                                    <td>{{ $client->name }}</td>
+
                                     <td>
-                                        @if (auth()->user()->hasPermission('products_update'))
-                                            <a href="{{ route('prodects.edit', $product->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                         @foreach($client->phone as $p)
+                                                   {{-$p}}
+                                         @endforeach
+                                    </td>
+
+                                    <td>{{ $client->address }}</td>
+                            
+                                    <td>
+                                        @if (auth()->user()->hasPermission('clients_update'))
+                                            <a href="{{route('clients.edit', $client->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                                         @else
                                             <a href="#" class="btn btn-info btn-sm disabled"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                                         @endif
-                                        @if (auth()->user()->hasPermission('products_delete'))
-                                            <form action="{{ route('prodects.destroy', $product->id) }}" method="post" style="display: inline-block">
+                                        @if (auth()->user()->hasPermission('clients_delete'))
+                                            <form action="{{ route('clients.destroy', $client->id) }}" method="post" style="display: inline-block">
                                                  @csrf
                                                 {{ method_field('delete') }}
-                                                   <input type="hidden"  name="old_image" value="{{$product->image}}">
-
                                                 <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                             </form><!-- end of form -->
                                         @else
@@ -106,13 +100,21 @@
                             </tbody>
 
                         </table><!-- end of table -->
-                        {{ $products->appends(request()->query())->links() }} 
+                        
+          
+                    
+
+                        <div class="text-center">
+                        {{$clients->links() }} 
+
+                        </div>
                         
                     @else
                         
                         <h2>@lang('site.no_data_found')</h2>
                         
                     @endif
+             
 
                 </div><!-- end of box body -->
 

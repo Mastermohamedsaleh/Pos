@@ -39,7 +39,7 @@ class UserController extends Controller
         if($request->search){      
             $users = User::where('name','like','%' . $request->search . '%' )->orwhere('email','like','%'.$request->search . '%')->latest()->paginate(3);
         }else{
-            $users = User::whereRoleIs('admin')->get();
+            $users = User::whereRoleIs('admin')->paginate(PAGINATE_COUNT);
 
         }
          

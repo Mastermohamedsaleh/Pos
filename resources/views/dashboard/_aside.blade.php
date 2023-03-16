@@ -24,6 +24,9 @@
            @if(auth()->user()->hasPermission('products_read'))
            <li><a href="{{URL('prodects')}}"><i class="fa fa-th"></i><span>{{trans('site.products')}}</span></a></li>         
            @endif
+           @if(auth()->user()->hasPermission('clients_read'))
+           <li><a href="{{URL('clients')}}"><i class="fa fa-th"></i><span>{{trans('site.clients')}}</span></a></li>         
+           @endif
 
 
             {{--<li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-book"></i><span>@lang('site.categories')</span></a></li>--}}

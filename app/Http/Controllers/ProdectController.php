@@ -12,10 +12,16 @@ use File;
 class ProdectController extends Controller
 {
   
-    public function index()
+    public function index(Request $request)
     {
 
-        $products = Prodect::all();
+
+         if($request->search){
+            $products = Prodect::where('name','like','%' . $request->search . '%' )->paginate(3);
+         }else{
+            $products = Prodect::all();
+         }
+
      return view('dashboard.prodects.index',compact('products'));
     }
 
@@ -119,8 +125,16 @@ class ProdectController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request , $id)
     {
-        //
+       $product = Prodect::findorfail($id);
+       $product->delete();
+        if(File::exists(public_path('uploads/products/'.$request->old_image))){
+            File::delete(public_path('uploads/products/'.$request->old_image));
+            }
+         
+            session()->flash('success', __('site.deleted_successfully'));
+            return redirect()->route('prodects .index');
+     
     }
 }

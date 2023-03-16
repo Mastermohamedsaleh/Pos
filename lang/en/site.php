@@ -34,6 +34,9 @@ return [
       'stock'=>'Stock',
       'description_en'=>'Description En',
       'description_ar'=>'Description Ar',
+      'clients'=>'clients',
+      'address'=>'Address',
+      'phone'=>'Phone'
     
 
 ];

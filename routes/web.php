@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProdectController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,9 @@ use App\Http\Controllers\ProdectController;
 // Route::get('/', function () {
 //     return view('home');
 // });
+
+define('PAGINATE_COUNT' , 5 );
+
 
 Auth::routes();
 
@@ -40,6 +44,7 @@ Route::group(
          Route::resource('users',UserController::class);
          Route::resource('categories',CategoryController::class);
          Route::resource('prodects',ProdectController::class);
+         Route::resource('clients',ClientController::class);
 
     });
 
