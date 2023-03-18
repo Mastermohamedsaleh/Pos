@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProdectController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::group(
          Route::resource('categories',CategoryController::class);
          Route::resource('prodects',ProdectController::class);
          Route::resource('clients',ClientController::class);
+         Route::resource('orders',OrderController::class);
 
     });
 

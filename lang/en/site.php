@@ -36,7 +36,13 @@ return [
       'description_ar'=>'Description Ar',
       'clients'=>'clients',
       'address'=>'Address',
-      'phone'=>'Phone'
+      'phone'=>'Phone',
+      'add_order'=>'Add Order',
+      'no_records'=>'No Records',
+      'price'=>'Price',
+      'product'=>'Product',
+      'quantity'=>'Quantity',
+      'total'=>'Total',
     
 
 ];

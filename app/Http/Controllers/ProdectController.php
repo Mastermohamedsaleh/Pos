@@ -17,9 +17,9 @@ class ProdectController extends Controller
 
 
          if($request->search){
-            $products = Prodect::where('name','like','%' . $request->search . '%' )->paginate(3);
+            $products = Prodect::where('name','like','%' . $request->search . '%' )->paginate(PAGINATE_COUNT);
          }else{
-            $products = Prodect::all();
+            $products = Prodect::paginate(PAGINATE_COUNT);
          }
 
      return view('dashboard.prodects.index',compact('products'));

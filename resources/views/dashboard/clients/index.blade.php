@@ -52,13 +52,14 @@
 
                     @if ($clients->count() > 0)
 
-                        <table class="table table-hover">
+                        <table class="table table-hover text-center">
 
                             <thead>
                             <tr>
                                 <th>#</th>
                                 <th>@lang('site.name')</th>
                                 <th>@lang('site.phone')</th>
+                                <th>@lang('site.add_order')</th>
                                 <th>@lang('site.address')</th>
                                 <th>@lang('site.action')</th>
                             </tr>
@@ -74,6 +75,16 @@
                                          @foreach($client->phone as $p)
                                                    {{-$p}}
                                          @endforeach
+                                    </td>
+
+
+
+                                    <td>
+                                        @if (auth()->user()->hasPermission('orders_create'))
+                                            <a href="{{Route('orders.create',$client->id)}}" class="btn btn-primary btn-sm">@lang('site.add_order')</a>
+                                        @else
+                                            <a href="#" class="btn btn-primary btn-sm disabled">@lang('site.add_order')</a>
+                                        @endif
                                     </td>
 
                                     <td>{{ $client->address }}</td>

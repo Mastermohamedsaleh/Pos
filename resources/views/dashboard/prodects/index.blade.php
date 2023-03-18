@@ -106,7 +106,7 @@
                             </tbody>
 
                         </table><!-- end of table -->
-                        {{ $products->appends(request()->query())->links() }} 
+                        {{ $products->links() }} 
                         
                     @else
                         

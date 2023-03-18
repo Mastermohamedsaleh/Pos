@@ -16,4 +16,11 @@ class Category extends Model
 
     public $translatable = ['name'];
 
+
+    public function products()
+    {
+        return $this->hasMany(Prodect::class);
+
+    }//end of products
+
 }
