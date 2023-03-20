@@ -43,6 +43,9 @@ return [
       'product'=>'Product',
       'quantity'=>'Quantity',
       'total'=>'Total',
-    
+      'orders'=>'Orders',
+      'client_name'=>'Client Name',
+      'show'=>'Show',
+      'show_products'=>'Show Products'    
 
 ];

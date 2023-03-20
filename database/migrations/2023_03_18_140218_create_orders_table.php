@@ -14,15 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->integer('client_id')->unsigned();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-
-
-            $table->bigInteger('product_id')->unsigned();
-
-            $table->foreign('product_id')->references('id')->on('prodects')->onDelete('cascade');
-
             $table->double('total_price', 8, 2)->nullable();
 
 

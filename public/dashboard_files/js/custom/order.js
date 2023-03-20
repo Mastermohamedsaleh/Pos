@@ -11,11 +11,14 @@ $(document).ready(function(){
 
         $(this).removeClass('btn-success').addClass('btn-default disabled');
 
+      console.log();
+
 
         var html =
             `<tr>
                 <td>${name}</td>
-                <td><input type="number" name="products[${id}][quantity]" data-price="${price}" class="form-control input-sm product-quantity" min="1" value="1"></td>
+                <input type="hidden"  name="products[]" value="${id}">
+                <td><input type="number" name="quantity[]" data-price="${price}" class="form-control input-sm product-quantity" min="1" value="1"></td>
                 <td class="product-price">${price}</td>               
                 <td><button class="btn btn-danger btn-sm remove-product-btn" data-id="${id}"><span class="fa fa-trash"></span></button></td>
             </tr>`;
@@ -59,6 +62,32 @@ $('body').on('change','.product-quantity',function(){
 
 
 
+$('.order-products').on('click', function(e) {
+
+    e.preventDefault();
+
+    var url = $(this).data('url');
+    var method = $(this).data('method');
+
+   
+ 
+    $.ajax({
+ 
+        url: url ,
+        method : method,
+        success: function(data){
+            $('#order-product-list').empty();
+            $('#order-product-list').append(data);
+    
+        }
+
+    })
+
+
+
+});
+
+
   function calculateTotal(){
 
    var price = 0;
@@ -71,6 +100,22 @@ $('body').on('change','.product-quantity',function(){
    });
    
    $('.total-price').html($.number(price, 2));
+
+   $('.total-price_input').val($.number(price, 2));
+
+
+
+   if (price > 0) {
+
+    $('#add-order-form-btn').removeClass('disabled')
+
+} else {
+
+    $('#add-order-form-btn').addClass('disabled')
+
+}//end of else
+
+
 
 
   }

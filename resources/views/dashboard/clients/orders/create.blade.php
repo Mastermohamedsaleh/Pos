@@ -15,11 +15,9 @@
 <section class="content">
 
 
+
+
             <div class="row">
-
-
-
-
 <div class="col-md-6 bg-primary">
  @foreach($categories as $category)
 <div class="card">
@@ -80,14 +78,38 @@
 
 
 
+
 <div class="col-md-6 ">
 
 
-<div class="card ">
+
+
+                
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<div class="card">
     <div class="card-header">
         <h1></h1>
     </div>
     <div class="card-body bg-info">
+
+
+
+<form action="{{ url('orders_store') }}" method="post">
+
+ 
+@csrf
+
+
+<input type="hidden" name="client_id" value="{{$client_id}}">
 
       <table  class="table table-hover" >
         <tr>
@@ -105,15 +127,17 @@
       </table>
 
       <h4>@lang('site.total') : <span class="total-price">0</span></h4>
+  
+      <input type="hidden" name="total_price" class="total-price_input">
      
+
+      <button class="btn btn-primary btn-block disabled" id="add-order-form-btn"><i class="fa fa-plus"></i> @lang('site.add_order')</button>
+
+      </form>
     </div>
 
 
 </div>
-
-
-
-
 
 
 <!-- End Col -->

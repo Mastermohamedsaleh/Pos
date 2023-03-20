@@ -46,7 +46,25 @@ Route::group(
          Route::resource('categories',CategoryController::class);
          Route::resource('prodects',ProdectController::class);
          Route::resource('clients',ClientController::class);
-         Route::resource('orders',OrderController::class);
+        //  Route::resource('orders',OrderController::class);
+
+
+
+
+        Route::controller(OrderController::class)->group(function() { 
+            
+            Route::get('orders', 'index');
+
+            Route::get('orders_create/{id}', 'create');
+          
+            Route::post('orders_store','store');
+
+            Route::get('/orders_products/{order}','products')->name('orders_products');
+        });
+     
+
+        
+
 
     });
 
