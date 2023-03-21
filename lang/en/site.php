@@ -26,6 +26,7 @@ return [
      'confirm_delete'=>'Conforim Delete',
      'deleted_successfully'=>'Deleted Successfully',
      'updated_successfully'=>'updated successfully',
+     'added_successfully'=>'Added Successfully',  
       'products'=>'Products',
       'name_en'=>'Name En',
       'name_ar'=>'Name Ar',
@@ -46,6 +47,11 @@ return [
       'orders'=>'Orders',
       'client_name'=>'Client Name',
       'show'=>'Show',
-      'show_products'=>'Show Products'    
+      'show_products'=>'Show Products',
+      'print'=>'Print',
+      'read'=>'Read',
+      'setting'=>'Setting',
+   
+     
 
 ];

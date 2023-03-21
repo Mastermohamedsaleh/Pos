@@ -15,7 +15,7 @@
 
 
             <ol class="breadcrumb">
-                <li><a href=""><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
                 <li class="active">@lang('site.categories')</li>
             </ol>
         </section>

@@ -73,7 +73,8 @@ return [
    'stock' => 'المخزن',
    'profit_percent' => 'المكسب',
    'description_ar'=>'الوصق باللغه العربيه',
-   'description_en'=>'الوصف باللغه الانجليزيه'
+   'description_en'=>'الوصف باللغه الانجليزيه',
+   'setting'=>'الاعدادت',
 
      
 ];

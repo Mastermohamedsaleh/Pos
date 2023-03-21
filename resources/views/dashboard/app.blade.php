@@ -88,7 +88,7 @@
 
     <header class="main-header">
 
-
+ 
 
         {{--<!-- Logo -->--}}
         <a href="{{ asset('dashboard') }}/index2.html" class="logo">
@@ -206,7 +206,7 @@
                     <li class="dropdown user user-menu">
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                            <img src="{{ asset('uploads/users/' .  image()   ) }}" class="user-image" alt="User Image">
                             <span class="hidden-xs"></span>
                         </a>
                         <ul class="dropdown-menu">

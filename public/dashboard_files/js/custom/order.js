@@ -123,6 +123,18 @@ $('.order-products').on('click', function(e) {
 
 
 
+//   Function To Print 
+$(document).on('click','.print-btn' , function(){
+    $('#print-area').printThis();
+});
+
+
+
+
+
+
+
+
 });
 
 

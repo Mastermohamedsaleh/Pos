@@ -8,6 +8,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
 
+use File;
 
 class UserController extends Controller
 {
@@ -37,7 +38,7 @@ class UserController extends Controller
 
            
         if($request->search){      
-            $users = User::where('name','like','%' . $request->search . '%' )->orwhere('email','like','%'.$request->search . '%')->latest()->paginate(3);
+            $users = User::whereRoleIs('admin')->where('name','like','%' . $request->search . '%' )->orwhere('email','like','%'.$request->search . '%')->latest()->paginate(PAGINATE_COUNT);
         }else{
             $users = User::whereRoleIs('admin')->paginate(PAGINATE_COUNT);
 
@@ -61,6 +62,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
+            // 'image' => 'required',
             'password' => 'required|confirmed',
             'permissions' => 'required|min:1'
         ]);
@@ -128,6 +130,16 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        //
-    }
+        
+        $user = User::findorfail($id);
+
+        if($user->image == !'default.png'){
+            File::delete(public_path('uploads/users/'.$user->image));
+        }//end if
+
+        $user->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('users.index');
+        
+    }//end destroy
 }

@@ -64,6 +64,8 @@ class ProdectController extends Controller
 
         $request->image->move(public_path('uploads/products'), $imageName);
 
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('prodects.index');
 
          
     }

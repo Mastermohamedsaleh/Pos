@@ -14,7 +14,7 @@
 
 
             <ol class="breadcrumb">
-                <li><a href=""><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
                 <li class="active">@lang('site.users')</li>
             </ol>
         </section>
@@ -54,7 +54,7 @@
 
                     @if ($users->count() > 0)
 
-                        <table class="table table-hover">
+                        <table class="table table-hover text-center">
 
                             <thead>
                             <tr>
@@ -73,7 +73,7 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><img src="{{ $user->image_path }}" style="width: 100px;" class="img-thumbnail" alt=""></td>
+                                    <td><img src="{{ asset('uploads/users/' . $user->image ) }}" style="width: 100px;" class="img-thumbnail" alt=""></td>
                                     <td>
                                     @if (auth()->user()->hasPermission('users_update'))                
                         <a href="{{route('users.edit',$user->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
@@ -82,8 +82,8 @@
                         @endif
                                            
                                   
-                            @if (auth()->user()->hasPermission('users_delete'))
-                                            <form action="" method="post" style="display: inline-block">
+                                       @if (auth()->user()->hasPermission('users_delete'))
+                                            <form action="{{route('users.destroy',$user->id)}}" method="post" style="display: inline-block">
                                                     @csrf
                                                 {{ method_field('delete') }}
                                                 <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>

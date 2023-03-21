@@ -11,10 +11,16 @@
             </h1>
 
             <ol class="breadcrumb">
-                <li><a href=""><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
                 <li class="active">@lang('site.orders')</li>
             </ol>
         </section>
+
+
+        @if(Session::has('success'))
+<p class="alert alert-info">{{ Session::get('success') }}</p>
+@endif
+
 
         <section class="content">
 
@@ -77,6 +83,18 @@
                                                 
 
                                            
+        
+
+                                                @if (auth()->user()->hasPermission('orders_delete'))
+                                                    <form action="{{ route('orders_destroy', $order->id) }}" method="post" style="display: inline-block;">
+                                                         @csrf
+                                                
+                                                        <button type="submit" class="btn btn-success btn-sm delete"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                                    </form>
+
+                                                @else
+                                                    <a href="#" class="btn btn-danger btn-sm" disabled><i class="fa fa-trash"></i> @lang('site.delete')</a>
+                                                @endif
 
 
 

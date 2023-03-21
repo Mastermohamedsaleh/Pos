@@ -13,7 +13,7 @@
 <p class="alert alert-info">{{ Session::get('success') }}</p>
 @endif
             <ol class="breadcrumb">
-                <li><a href=""><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
+                <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
                 <li class="active">@lang('site.products')</li>
             </ol>
         </section>
@@ -64,7 +64,6 @@
                                 <th>@lang('site.image')</th>
                                 <th>@lang('site.purchase_price')</th>
                                 <th>@lang('site.sale_price')</th>
-                                <th>@lang('site.profit_percent') %</th>
                                 <th>@lang('site.stock')</th>
                                 <th>@lang('site.action')</th>
                             </tr>
@@ -75,12 +74,10 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $product->name }}</td>
-                                 
                                     <td>{{ $product->category->name }}</td>
                                     <td><img src="{{ asset('uploads/products/'.$product->image) }}" style="width: 100px"  class="img-thumbnail" alt=""></td>
                                     <td>{{ $product->purchase_price }}</td>
                                     <td>{{ $product->sale_price }}</td>
-                                    <td>{{ $product->profit_percent }} %</td>
                                     <td>{{ $product->stock }}</td>
                                     <td>
                                         @if (auth()->user()->hasPermission('products_update'))
