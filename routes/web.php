@@ -27,7 +27,7 @@ use App\Http\Controllers\SettingController;
 define('PAGINATE_COUNT' , 5 );
 
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 
 

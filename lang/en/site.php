@@ -51,6 +51,7 @@ return [
       'print'=>'Print',
       'read'=>'Read',
       'setting'=>'Setting',
+      'logout'=>'Logout'
    
      
 

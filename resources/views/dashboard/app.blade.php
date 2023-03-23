@@ -215,12 +215,9 @@
 
                             {{--<!-- User image -->--}}
                             <li class="user-header">
-                                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                                <img src="{{ asset('uploads/users/' .  image()   ) }}" class="img-circle" alt="User Image">
 
-                                <p>
                           
-                                    <small>Member since 2 days</small>
-                                </p>
                             </li>
 
                             {{--<!-- Menu Footer-->--}}
