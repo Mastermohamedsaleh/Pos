@@ -11,7 +11,7 @@ $(document).ready(function(){
 
         $(this).removeClass('btn-success').addClass('btn-default disabled');
 
-      console.log();
+      
 
 
         var html =

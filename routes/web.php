@@ -9,6 +9,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SettingController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,7 +82,6 @@ Route::controller(SettingController::class)->group(function() {
 });
 
 
- 
 
         
 
